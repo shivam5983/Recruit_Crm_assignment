@@ -13,4 +13,4 @@ Responsive and modern UI design
   ## 📸 Screenshots
   <img width="1051" height="801" alt="image" src="https://github.com/user-attachments/assets/bf1f0742-56f5-4fb0-a720-ea548439a57b" />
 
-  Github Link: 
+  Github Link: https://github.com/shivam5983/Recruit_Crm_assignment/tree/main
