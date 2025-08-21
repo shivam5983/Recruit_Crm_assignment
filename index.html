@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Company Profile — UX Redesign Prototype</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Top App Bar -->
+    <header class="topbar">
+      <div class="topbar__left">
+        <span class="logo">RecruitCRM</span>
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="#" class="crumb">Companies</a>
+          <span class="crumb-sep">›</span>
+          <span class="crumb current">Acme Corp</span>
+        </nav>
+      </div>
+      <div class="topbar__right">
+        <input
+          id="globalSearch"
+          class="input input--search"
+          type="search"
+          placeholder="Search companies, jobs, contacts…"
+          aria-label="Global search"
+        />
+        <button class="btn btn--ghost" aria-label="Notifications">🔔</button>
+        <div class="avatar" title="You">S</div>
+      </div>
+    </header>
+
+    <!-- Page Header / Identity Bar -->
+    <section class="company-header">
+      <div class="company-header__left">
+        <div class="avatar avatar--lg">A</div>
+        <div>
+          <div class="company-title">
+            <h1 id="companyName">Acme Corp</h1>
+            <span class="badge badge--success" id="companyStatus"
+              >Active Client</span
+            >
+          </div>
+          <div class="company-meta">
+            <span id="companyOwner">Owner: Priya Sharma</span>
+            <span>•</span>
+            <span id="companyLocation">Mumbai, IN</span>
+            <span>•</span>
+            <div class="tags" id="companyTags">
+              <span class="tag">SaaS</span>
+              <span class="tag">FinTech</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="company-header__right">
+        <button id="btnAddJob" class="btn btn--primary">+ Add Job</button>
+        <button id="btnLogActivity" class="btn btn--secondary">
+          ✎ Log Activity
+        </button>
+        <button id="btnAddContact" class="btn btn--ghost">+ Add Contact</button>
+        <button class="btn btn--ghost" aria-label="More actions">⋯</button>
+      </div>
+    </section>
+
+    <!-- KPI / Summary Cards -->
+    <section class="kpis">
+      <div class="kpi">
+        <div class="kpi__label">Open Jobs</div>
+        <div class="kpi__value" id="kpiOpenJobs">0</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi__label">Active Candidates</div>
+        <div class="kpi__value" id="kpiActiveCandidates">0</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi__label">Last Activity</div>
+        <div class="kpi__value" id="kpiLastActivity">—</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi__label">Next Follow-up</div>
+        <div class="kpi__value" id="kpiNextFollowUp">—</div>
+      </div>
+    </section>
+
+    <!-- Tabs -->
+    <nav class="tabs" role="tablist" aria-label="Company Sections">
+      <button
+        class="tab is-active"
+        role="tab"
+        aria-selected="true"
+        aria-controls="panel-overview"
+        id="tab-overview"
+      >
+        Overview
+      </button>
+      <button
+        class="tab"
+        role="tab"
+        aria-selected="false"
+        aria-controls="panel-jobs"
+        id="tab-jobs"
+      >
+        Jobs
+      </button>
+      <button
+        class="tab"
+        role="tab"
+        aria-selected="false"
+        aria-controls="panel-contacts"
+        id="tab-contacts"
+      >
+        Contacts
+      </button>
+      <button
+        class="tab"
+        role="tab"
+        aria-selected="false"
+        aria-controls="panel-candidates"
+        id="tab-candidates"
+      >
+        Candidates
+      </button>
+      <button
+        class="tab"
+        role="tab"
+        aria-selected="false"
+        aria-controls="panel-activities"
+        id="tab-activities"
+      >
+        Activities
+      </button>
+      <button
+        class="tab"
+        role="tab"
+        aria-selected="false"
+        aria-controls="panel-files"
+        id="tab-files"
+      >
+        Files
+      </button>
+    </nav>
+
+    <!-- Panels -->
+    <main class="layout">
+      <section
+        class="panel is-active"
+        id="panel-overview"
+        role="tabpanel"
+        aria-labelledby="tab-overview"
+      >
+        <div class="grid">
+          <div class="card">
+            <div class="card__header">
+              <h2>Open Jobs</h2>
+              <div class="segmented" role="group" aria-label="Job filters">
+                <button class="segmented__btn is-active" data-job-filter="all">
+                  All
+                </button>
+                <button class="segmented__btn" data-job-filter="open">
+                  Open
+                </button>
+                <button class="segmented__btn" data-job-filter="hot">
+                  Hot
+                </button>
+              </div>
+            </div>
+            <ul id="listJobs" class="list list--media"></ul>
+          </div>
+
+          <div class="card">
+            <div class="card__header">
+              <h2>Key Contacts</h2>
+            </div>
+            <ul id="listContacts" class="list list--media"></ul>
+          </div>
+
+          <div class="card">
+            <div class="card__header">
+              <h2>Recent Activity</h2>
+              <div class="filters">
+                <select id="activityTypeFilter" class="input">
+                  <option value="all">All Types</option>
+                  <option value="call">Calls</option>
+                  <option value="email">Emails</option>
+                  <option value="note">Notes</option>
+                </select>
+                <input
+                  id="activitySearch"
+                  class="input"
+                  type="search"
+                  placeholder="Search activity…"
+                />
+              </div>
+            </div>
+            <ul id="timeline" class="timeline"></ul>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="panel"
+        id="panel-jobs"
+        role="tabpanel"
+        aria-labelledby="tab-jobs"
+      >
+        <div class="card">
+          <div class="card__header">
+            <h2>Jobs</h2>
+            <button id="btnAddJob2" class="btn btn--primary btn--sm">
+              + Add Job
+            </button>
+          </div>
+          <ul id="listJobsFull" class="list list--media"></ul>
+        </div>
+      </section>
+
+      <section
+        class="panel"
+        id="panel-contacts"
+        role="tabpanel"
+        aria-labelledby="tab-contacts"
+      >
+        <div class="card">
+          <div class="card__header">
+            <h2>Contacts</h2>
+            <button id="btnAddContact2" class="btn btn--secondary btn--sm">
+              + Add Contact
+            </button>
+          </div>
+          <ul id="listContactsFull" class="list list--media"></ul>
+        </div>
+      </section>
+
+      <section
+        class="panel"
+        id="panel-candidates"
+        role="tabpanel"
+        aria-labelledby="tab-candidates"
+      >
+        <div class="card">
+          <div class="card__header">
+            <h2>Candidates</h2>
+          </div>
+          <div id="candidatesEmpty" class="empty">No candidates yet.</div>
+        </div>
+      </section>
+
+      <section
+        class="panel"
+        id="panel-activities"
+        role="tabpanel"
+        aria-labelledby="tab-activities"
+      >
+        <div class="card">
+          <div class="card__header">
+            <h2>Activities</h2>
+            <div class="filters">
+              <select id="activityTypeFilter2" class="input">
+                <option value="all">All Types</option>
+                <option value="call">Calls</option>
+                <option value="email">Emails</option>
+                <option value="note">Notes</option>
+              </select>
+            </div>
+          </div>
+          <ul id="timelineFull" class="timeline"></ul>
+        </div>
+      </section>
+
+      <section
+        class="panel"
+        id="panel-files"
+        role="tabpanel"
+        aria-labelledby="tab-files"
+      >
+        <div class="card">
+          <div class="card__header"><h2>Files</h2></div>
+          <div class="empty">No files uploaded.</div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Dialogs -->
+    <dialog id="dlgAddJob" class="dialog">
+      <form method="dialog" class="dialog__content" id="formAddJob">
+        <h3>Add Job</h3>
+        <label class="field">
+          <span>Job Title</span>
+          <input class="input" name="title" required />
+        </label>
+        <label class="field">
+          <span>Status</span>
+          <select class="input" name="status" required>
+            <option value="open">Open</option>
+            <option value="hot">Hot</option>
+            <option value="closed">Closed</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Location</span>
+          <input class="input" name="location" />
+        </label>
+        <menu class="dialog__actions">
+          <button class="btn btn--ghost" value="cancel">Cancel</button>
+          <button class="btn btn--primary" value="default">Save</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <dialog id="dlgLogActivity" class="dialog">
+      <form method="dialog" class="dialog__content" id="formLogActivity">
+        <h3>Log Activity</h3>
+        <label class="field">
+          <span>Type</span>
+          <select class="input" name="type" required>
+            <option value="call">Call</option>
+            <option value="email">Email</option>
+            <option value="note">Note</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Subject</span>
+          <input class="input" name="subject" required />
+        </label>
+        <label class="field">
+          <span>Details</span>
+          <textarea class="input" name="body" rows="4"></textarea>
+        </label>
+        <label class="field">
+          <span>Next Follow-up</span>
+          <input class="input" name="followup" type="date" />
+        </label>
+        <menu class="dialog__actions">
+          <button class="btn btn--ghost" value="cancel">Cancel</button>
+          <button class="btn btn--primary" value="default">Log</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <dialog id="dlgAddContact" class="dialog">
+      <form method="dialog" class="dialog__content" id="formAddContact">
+        <h3>Add Contact</h3>
+        <label class="field">
+          <span>Name</span>
+          <input class="input" name="name" required />
+        </label>
+        <label class="field">
+          <span>Email</span>
+          <input class="input" name="email" type="email" />
+        </label>
+        <label class="field">
+          <span>Role</span>
+          <input class="input" name="role" />
+        </label>
+        <menu class="dialog__actions">
+          <button class="btn btn--ghost" value="cancel">Cancel</button>
+          <button class="btn btn--primary" value="default">Save</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <!-- Toast -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
